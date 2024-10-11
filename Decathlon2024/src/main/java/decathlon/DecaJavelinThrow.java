@@ -11,7 +11,7 @@ public class DecaJavelinThrow {
 	private double C = 1.08;
 	boolean active = true;
 	CalcTrackAndField calc = new CalcTrackAndField();
-	InputResult inputResult = new InputResult();
+	public InputResult inputResult = new InputResult();
 
 	// Calculate the score based on distance and height. Measured in meters.
 	public int calculateResult(double distance) {
@@ -40,5 +40,21 @@ public class DecaJavelinThrow {
 		System.out.println("The result is: " + score);
 		return score;
 	}
+	// Method to set the active flag in order to get around the while loop during testing
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
+	// Getter methods for A, B, and C to send to JUnit for testing
+	public double getA() {
+		return A;
+	}
+
+	public double getB() {
+		return B;
+	}
+
+	public double getC() {
+		return C;
+	}
 }
