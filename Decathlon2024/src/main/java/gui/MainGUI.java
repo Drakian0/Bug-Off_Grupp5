@@ -39,10 +39,10 @@ public class MainGUI {
         // Added identifiers for all the events
         // Dropdown for selecting discipline
         String[] disciplines = {
-                "100m", "400m", "1500m", "110m Hurdles",
-                "Deca Long Jump", "Deca High Jump", "Pole Vault",
-                "Discus Throw", "Deca Javelin Throw", "Deca Shot Put", "-",
-                "100m Hurdles", "200m", "800m", "Hep Javelin Throw", "Hep High Jump",
+                "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
+                "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
+                "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put", "-",
+                "Hep 100m Hurdles", "Hep 200m", "Hep 800m", "Hep Javelin Throw", "Hep High Jump",
                 "Hep Long Jump", "Hep Shot Put"
         };
         disciplineBox = new JComboBox<>(disciplines);
@@ -82,55 +82,55 @@ public class MainGUI {
 
                 int score = 0;
                 switch (discipline) {
-                    case "100m":
+                    case "Dec 100m":
                         Deca100M deca100M = new Deca100M();
                         score = deca100M.calculateResult(result);
                         break;
-                    case "400m":
+                    case "Dec 400m":
                         Deca400M deca400M = new Deca400M();
                         score = deca400M.calculateResult(result);
                         break;
-                    case "1500m":
+                    case "Dec 1500m":
                         Deca1500M deca1500M = new Deca1500M();
                         score = deca1500M.calculateResult(result);
                         break;
-                    case "110m Hurdles":
+                    case "Dec 110m Hurdles":
                         Deca110MHurdles deca110MHurdles = new Deca110MHurdles();
                         score = deca110MHurdles.calculateResult(result);
                         break;
-                    case "Deca Long Jump":
+                    case "Dec Long Jump":
                         DecaLongJump decaLongJump = new DecaLongJump();
                         score = decaLongJump.calculateResult(result);
                         break;
-                    case "Deca High Jump":
+                    case "Dec High Jump":
                         DecaHighJump decaHighJump = new DecaHighJump();
                         score = decaHighJump.calculateResult(result);
                         break;
-                    case "Pole Vault":
+                    case "Dec Pole Vault":
                         DecaPoleVault decaPoleVault = new DecaPoleVault();
                         score = decaPoleVault.calculateResult(result);
                         break;
-                    case "Discus Throw":
+                    case "Dec Discus Throw":
                         DecaDiscusThrow decaDiscusThrow = new DecaDiscusThrow();
                         score = decaDiscusThrow.calculateResult(result);
                         break;
-                    case "Deca Javelin Throw":
+                    case "Dec Javelin Throw":
                         DecaJavelinThrow decaJavelinThrow = new DecaJavelinThrow();
                         score = decaJavelinThrow.calculateResult(result);
                         break;
-                    case "Deca Shot Put":
+                    case "Dec Shot Put":
                         DecaShotPut decaShotPut = new DecaShotPut();
                         score = decaShotPut.calculateResult(result);
                         break;
-                    case "100m Hurdles":
+                    case "Hep 100m Hurdles":
                         Hep100MHurdles hep100MHurdles = new Hep100MHurdles();
                         score = hep100MHurdles.calculateResult(result);
                         break;
-                    case "200m":
+                    case "Hep 200m":
                         Hep200M hep200M = new Hep200M();
                         score = hep200M.calculateResult(result);
                         break;
-                    case "800m":
+                    case "Hep 800m":
                         Hep800M hep800M = new Hep800M();
                         score = hep800M.calculateResult(result);
                         break;
