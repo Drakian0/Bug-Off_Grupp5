@@ -36,6 +36,7 @@ public class MainGUI {
         panel.add(new JLabel("Enter Competitor's Name:"));
         panel.add(nameField);
 
+        // Added identifiers for all the events
         // Dropdown for selecting discipline
         String[] disciplines = {
                 "100m", "400m", "1500m", "110m Hurdles",
@@ -75,6 +76,7 @@ public class MainGUI {
             String discipline = (String) disciplineBox.getSelectedItem();
             String resultText = resultField.getText();
 
+// added switches for hep events
             try {
                 double result = Double.parseDouble(resultText);
 
