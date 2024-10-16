@@ -19,10 +19,10 @@ public class Hep200M {
 
 			try {
 				// Acceptable values.
-				if (runningTime < 14) {
+				if (runningTime < 20) {
 					System.out.println("Value too low");
 					runningTime = inputResult.enterResult();
-				} else if (runningTime > 42.08) {
+				} else if (runningTime > 100) {
 					// get 1 point in 42.08sec
 					System.out.println("Value too high");
 					runningTime = inputResult.enterResult();
