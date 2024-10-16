@@ -11,7 +11,7 @@ public class Hep100MHurdles {
 	private double C = 1.835;  //ändrade istället för 18.35
 	boolean active = true;
 	CalcTrackAndField calc = new CalcTrackAndField();
-	InputResult inputResult = new InputResult();
+	public InputResult inputResult = new InputResult();
 
 	// Calculate the score based on time. All running events.
 	public int calculateResult(double runningTime) {
@@ -20,12 +20,12 @@ public class Hep100MHurdles {
 
 			try {
 				// Acceptable values.
-				if (runningTime < 5) {
+				if (runningTime < 10) {
 					System.out.println("Value too low");
 					runningTime = inputResult.enterResult();
-				} else if (runningTime > 26.4) {
+				} else if (runningTime > 30) {
 					System.out.println("Value too high");
-					//runningTime = inputResult.enterResult();
+					runningTime = inputResult.enterResult();
 				} else {
 
 					score = calc.calculateTrack(A, B, C, runningTime);
