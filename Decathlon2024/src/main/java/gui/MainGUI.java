@@ -23,6 +23,7 @@ public class MainGUI {
     private JTextField resultField;
     private JComboBox<String> disciplineBox;
     private JTextArea outputArea;
+    private ArrayList<Competitor> competitors = new ArrayList<>();
 
     public static void main(String[] args) {
         new MainGUI().createAndShowGUI();
@@ -156,6 +157,14 @@ public class MainGUI {
                         break;
                 }
 
+                if (competitors.size() > 40) {
+                    JOptionPane.showMessageDialog(null, "Maximum number of competitors reached (40).", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Competitor competitor = new Competitor(name);
+                    competitors.add(competitor);
+                    competitor.setScore(discipline, score);
+                }
+                
                 outputArea.append("Competitor: " + name + "\n");
                 outputArea.append("Discipline: " + discipline + "\n");
                 outputArea.append("Result: " + result + "\n");
