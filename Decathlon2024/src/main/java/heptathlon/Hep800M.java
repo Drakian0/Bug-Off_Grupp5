@@ -10,7 +10,7 @@ public class Hep800M {
 	private double C = 1.88;
 	boolean active = true;
 	CalcTrackAndField calc = new CalcTrackAndField();
-	InputResult inputResult = new InputResult();
+	public InputResult inputResult = new InputResult(); // Public for testing purposes
 
 	// Calculate the score based on time. All running events.
 	public int calculateResult(double runningTime) {

@@ -11,7 +11,7 @@ public class HeptHightJump {
 	private double C = 1.348;
 	boolean active = true;
 	CalcTrackAndField calc = new CalcTrackAndField();
-	InputResult inputResult = new InputResult();
+	public InputResult inputResult = new InputResult(); // Public for testing purposes
 
 	// Calculate the score based on distance and height. Measured in cenimeters.
 	public int calculateResult(double distance) {
