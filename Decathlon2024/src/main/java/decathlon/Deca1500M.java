@@ -7,7 +7,7 @@ public class Deca1500M {
 	private int score;
 	private double A = 0.03768;
 	private double B = 480;
-	private double C = 1.85; // 18.5 is the default value from the code we got but the correct value from the requirements is 1.85
+	private double C = 1.85;
 	boolean active = true;
 
 	CalcTrackAndField calc = new CalcTrackAndField();

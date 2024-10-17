@@ -22,7 +22,7 @@ public class Hep800M {
 				if (runningTime < 70) {
 					System.out.println("Value too low");
 					runningTime = inputResult.enterResult();
-				} else if (runningTime > 250.79) {
+				} else if (runningTime > 250) {
 					// competitor gets 1 point in 250.79 sec
 					System.out.println("Value too high");
 					runningTime = inputResult.enterResult();
