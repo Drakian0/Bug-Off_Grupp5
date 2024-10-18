@@ -157,11 +157,15 @@ public class MainGUI {
                         break;
                 }
 
-                if (competitors.size() > 40) {
+                if (competitors.size() >= 40) {
                     JOptionPane.showMessageDialog(null, "Maximum number of competitors reached (40).", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    Competitor competitor = new Competitor(name);
-                    competitors.add(competitor);
+                    Competitor competitor = findCompetitorByName(name);
+                    if(competitor==null) {
+                        competitor = new Competitor(name);
+                        competitors.add(competitor);
+                    }
+
                     competitor.setScore(discipline, score);
                 }
                 
@@ -173,6 +177,15 @@ public class MainGUI {
                 JOptionPane.showMessageDialog(null, "Please enter a valid number for the result.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+    // Method to find an existing competitor by name
+    private Competitor findCompetitorByName(String name) {
+        for (Competitor competitor : competitors) {
+            if (competitor.getName().equalsIgnoreCase(name)) {
+                return competitor;
+            }
+        }
+        return null;  // If not found, return null
     }
 }
 
