@@ -14,7 +14,7 @@ public class TestHepShotPut {
     @Test
     public void testBelowLowerBoundary() throws Exception{
         InputResult mockInputResult = Mockito.mock(InputResult.class);
-        when(mockInputResult.enterResult()).thenReturn(100.0);
+        when(mockInputResult.enterResult()).thenReturn(20.0);
         hepShotPut.inputResult = mockInputResult;
         String output = tapSystemOut(() -> {hepShotPut.calculateResult(-0.1);});
         assertTrue(output.contains("Value too low"));
@@ -47,7 +47,7 @@ public class TestHepShotPut {
     @Test
     public void testAboveUpperBoundary() throws Exception{
         InputResult mockInputResult = Mockito.mock(InputResult.class);
-        when(mockInputResult.enterResult()).thenReturn(100.0);
+        when(mockInputResult.enterResult()).thenReturn(20.);
         hepShotPut.inputResult = mockInputResult;
         String output = tapSystemOut(() -> {hepShotPut.calculateResult(30.1);});
         assertTrue(output.contains("Value too high"));
