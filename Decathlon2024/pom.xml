@@ -52,6 +52,18 @@
 			<artifactId>mockito-core</artifactId>
 			<version>5.14.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.stefanbirkner</groupId>
+			<artifactId>system-lambda</artifactId>
+			<version>1.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.stefanbirkner</groupId>
+			<artifactId>system-lambda</artifactId>
+			<version>1.2.0</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
