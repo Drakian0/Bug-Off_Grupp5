@@ -11,7 +11,7 @@ public class HeptJavelinThrow {
 	private double C = 1.04;
 	boolean active = true;
 	CalcTrackAndField calc = new CalcTrackAndField();
-	InputResult inputResult = new InputResult();
+	public InputResult inputResult = new InputResult(); // Public for testing purposes
 
 	// Calculate the score based on distance and height. Measured in metres.
 	public int calculateResult(double distance) {
@@ -23,7 +23,7 @@ public class HeptJavelinThrow {
 				if (distance < 0) {
 					System.out.println("Value too low");
 					distance = inputResult.enterResult();
-				} else if (distance > 100) {
+				} else if (distance > 110) {
 
 					System.out.println("Value too high");
 					distance = inputResult.enterResult();

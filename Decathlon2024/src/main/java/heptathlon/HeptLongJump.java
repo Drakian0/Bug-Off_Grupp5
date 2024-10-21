@@ -6,12 +6,12 @@ import common.InputResult;
 public class HeptLongJump {
 
 	private int score;
-	private double A = 0.1888807;
+	private double A = 0.188807;
 	private double B = 210;
 	private double C = 1.41;
 	boolean active = true;
 	CalcTrackAndField calc = new CalcTrackAndField();
-	InputResult inputResult = new InputResult();
+	public InputResult inputResult = new InputResult(); // Public for testing purposes
 
 	// Calculate the score based on distance and height. Measured in meters.
 	public int calculateResult(double distance) {
@@ -23,7 +23,7 @@ public class HeptLongJump {
 				if (distance < 0) {
 					System.out.println("Value too low");
 					distance = inputResult.enterResult();
-				} else if (distance > 400) {
+				} else if (distance > 1000) {
 
 					System.out.println("Value too high");
 					distance = inputResult.enterResult();
