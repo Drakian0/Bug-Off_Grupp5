@@ -47,25 +47,25 @@ public class Competitor {
                 break;
 
             // Heptathlon Events
-            case "100m Hurdles (Heptathlon)":
+            case "Hep 100m Hurdles":
                 scores[10] = score;
                 break;
-            case "200m (Heptathlon)":
+            case "Hep 200m":
                 scores[11] = score;
                 break;
-            case "800m (Heptathlon)":
+            case "Hep 800m":
                 scores[12] = score;
                 break;
-            case "High Jump (Heptathlon)":
+            case "Hep High Jump":
                 scores[13] = score;
                 break;
-            case "Long Jump (Heptathlon)":
+            case "Hep Long Jump":
                 scores[14] = score;
                 break;
-            case "Shot Put (Heptathlon)":
+            case "Hep Shot Put":
                 scores[15] = score;
                 break;
-            case "Javelin Throw (Heptathlon)":
+            case "Hep Javelin Throw":
                 scores[16] = score;
                 break;
         }
@@ -91,4 +91,3 @@ public class Competitor {
     }
 
 }
-
