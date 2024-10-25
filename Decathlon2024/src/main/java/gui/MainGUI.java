@@ -4,16 +4,19 @@ package gui;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import common.Competitor;
 import decathlon.*;
+import excel.ExcelPrinter;
 import heptathlon.*;
 
 
@@ -23,6 +26,8 @@ public class MainGUI {
     private JTextField resultField;
     private JComboBox<String> disciplineBox;
     private JTextArea outputArea;
+    private JTable competitorTable;
+    private DefaultTableModel tableModel;
     private ArrayList<Competitor> competitors = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -32,7 +37,9 @@ public class MainGUI {
     private void createAndShowGUI() {
         JFrame frame = new JFrame("Track and Field Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(1000, 800);
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
 
         JPanel panel = new JPanel(new GridLayout(6, 1));
 
@@ -64,13 +71,30 @@ public class MainGUI {
         calculateButton.addActionListener(new CalculateButtonListener());
         panel.add(calculateButton);
 
+        JButton exportButton = new JButton("Export to Excel");
+        exportButton.addActionListener(new ExportButtonListener());  // New export button listener
+        panel.add(exportButton);  // Add export button to the panel
+
         // Output area
         outputArea = new JTextArea(5, 40);
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
         panel.add(scrollPane);
 
-        frame.add(panel);
+        // Table for displaying competitors and their results
+        String[] columnNames = {"Name", "100m", "400m", "1500m", "110m Hurdles",
+                "Long Jump", "High Jump", "Pole Vault",
+                "Discus Throw", "Javelin Throw", "Shot Put",
+                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep High Jump",
+                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"};
+        tableModel = new DefaultTableModel(columnNames, 0);
+        competitorTable = new JTable(tableModel);
+        JScrollPane tableScrollPane = new JScrollPane(competitorTable);
+        tableScrollPane.setPreferredSize(new Dimension(750, 200));
+
+        frame.setLayout(new BorderLayout());
+        frame.add(panel, BorderLayout.CENTER);  // Top panel with inputs
+        frame.add(tableScrollPane, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
 
@@ -187,6 +211,40 @@ public class MainGUI {
         }
         return null;  // If not found, return null
     }
+
+    private class ExportButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                exportToExcel();
+                JOptionPane.showMessageDialog(null, "Results exported successfully!", "Export Successful", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Failed to export results to Excel.", "Export Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void exportToExcel() throws IOException {
+        String[][] data = new String[competitors.size()][];
+        int i = 0;
+        for (Competitor competitor : competitors) {
+            Object[] rowData = competitor.getRowData(); // Get the competitor's row data
+
+            // Ensure the array size matches the number of columns in rowData
+            data[i] = new String[rowData.length];
+
+            // Safely copy rowData to data array
+            for (int j = 0; j < rowData.length; j++) {
+                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : "";  // Handle null values
+            }
+            i++;
+        }
+
+        ExcelPrinter printer = new ExcelPrinter("TrackAndFieldResults");
+        printer.add(data, "Results");
+        printer.write();
+    }
+
 }
 
 
