@@ -1,5 +1,3 @@
-// Added my code but commented out the old code instead of overwriting it.
-
 package gui;
 
 
