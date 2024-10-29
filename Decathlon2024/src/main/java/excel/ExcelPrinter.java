@@ -47,28 +47,38 @@ public class ExcelPrinter {
 
         int rowCount = sheet.getLastRowNum() + 1; // Fortsätter på raden efter rubrikerna
 
-        for (Object[] rowData : data) {
-            Row row = sheet.createRow(rowCount++);
+        for (Object[] aBook : data) {
+            Row row = sheet.createRow(rowCount);
+            rowCount++;
             int columnCount = 0;
 
-            for (Object field : rowData) {
-                Cell cell = row.createCell(columnCount++);
+            for (Object field : aBook) {
+                Cell cell = row.createCell(columnCount);
+                columnCount++;
+
                 if (field instanceof String) {
                     cell.setCellValue((String) field);
+
                 } else if (field instanceof Integer) {
                     cell.setCellValue((Integer) field);
+
                 } else if (field instanceof Double) {
                     cell.setCellValue((Double) field);
+
                 }
             }
         }
+
+        // Autojustera kolumnbredder för att passa innehållet
+        for (int i = 0; i < data[0].length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
     }
 
     public void write() throws IOException {
-        try (FileOutputStream out = new FileOutputStream("C:/Eclipse/resultat_" + excelName + ".xlsx")) {
-            workbook.write(out);
-        } finally {
-            workbook.close();
-        }
+        FileOutputStream out = new FileOutputStream("C:/Eclipse/resultat_" + excelName + ".xlsx");
+        workbook.write(out);
+        workbook.close();
     }
 }

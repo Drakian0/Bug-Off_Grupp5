@@ -250,8 +250,7 @@ public class MainGUI {
                 "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
                 "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep High Jump",
-                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"
-        };
+                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"};
 
         ExcelPrinter printer = new ExcelPrinter("TrackAndFieldResults");
         printer.addHeaders(headers, "Results");  // Lägg till rubriker
