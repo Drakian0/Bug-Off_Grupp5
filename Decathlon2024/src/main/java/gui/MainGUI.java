@@ -1,3 +1,4 @@
+
 package gui;
 
 
@@ -94,6 +95,13 @@ public class MainGUI {
         frame.add(panel, BorderLayout.CENTER);  // Top panel with inputs
         frame.add(tableScrollPane, BorderLayout.SOUTH);
         frame.setVisible(true);
+    }
+
+    private void updateCompetitorTable() {
+        tableModel.setRowCount(0); // Rensa tabellen innan uppdatering
+        for (Competitor competitor : competitors) {
+            tableModel.addRow(competitor.getRowData());
+        }
     }
 
     private class CalculateButtonListener implements ActionListener {
@@ -195,6 +203,9 @@ public class MainGUI {
                 outputArea.append("Discipline: " + discipline + "\n");
                 outputArea.append("Result: " + result + "\n");
                 outputArea.append("Score: " + score + "\n\n");
+
+                updateCompetitorTable(); // Uppdaterar GUI-tabellen med den senaste informationen
+
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter a valid number for the result.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
@@ -226,20 +237,25 @@ public class MainGUI {
         String[][] data = new String[competitors.size()][];
         int i = 0;
         for (Competitor competitor : competitors) {
-            Object[] rowData = competitor.getRowData(); // Get the competitor's row data
-
-            // Ensure the array size matches the number of columns in rowData
+            Object[] rowData = competitor.getRowData();
             data[i] = new String[rowData.length];
-
-            // Safely copy rowData to data array
             for (int j = 0; j < rowData.length; j++) {
-                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : "";  // Handle null values
+                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : "";
             }
             i++;
         }
 
+        String[] headers = {
+                "Name", "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
+                "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
+                "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
+                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep High Jump",
+                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"
+        };
+
         ExcelPrinter printer = new ExcelPrinter("TrackAndFieldResults");
-        printer.add(data, "Results");
+        printer.addHeaders(headers, "Results");  // Lägg till rubriker
+        printer.add(data, "Results");            // Lägg till data
         printer.write();
     }
 
