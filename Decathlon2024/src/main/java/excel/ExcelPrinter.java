@@ -5,11 +5,9 @@ import java.util.Date;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 
 public class ExcelPrinter {
 
@@ -24,7 +22,27 @@ public class ExcelPrinter {
         excelName = name + "_" + timeStamp;  // Lägg till tidsstämpeln
     }
 
-    //addHeaders skriver rubrikerna i den första raden.
+    // Skapa och applicera cellstil för rubriker
+    private CellStyle createHeaderStyle() {
+        CellStyle style = workbook.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);  // Centrera text
+
+        // Skapa och applicera fetstil på font
+        Font font = workbook.createFont();
+        font.setBold(true);  // Gör texten fet
+        style.setFont(font);
+
+        return style;
+    }
+
+    // Skapa och applicera cellstil för dataceller
+    private CellStyle createDataStyle() {
+        CellStyle style = workbook.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);  // Centrera text i dataceller
+        return style;
+    }
+
+    // addHeaders skriver rubrikerna i den första raden.
     public void addHeaders(String[] headers, String sheetName) {
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null) {
@@ -32,13 +50,16 @@ public class ExcelPrinter {
         }
 
         Row headerRow = sheet.createRow(0);  // Skapar första raden för rubrikerna
+        CellStyle headerStyle = createHeaderStyle();  // Skapa stil för rubriker
+
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerStyle);  // Applicera stil
         }
     }
 
-    //add-metoden lägger till själva datan, med start från andra raden.
+    // add-metoden lägger till själva datan, med start från andra raden.
     public void add(Object[][] data, String sheetName) {
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null) {
@@ -46,6 +67,7 @@ public class ExcelPrinter {
         }
 
         int rowCount = sheet.getLastRowNum() + 1; // Fortsätter på raden efter rubrikerna
+        CellStyle dataStyle = createDataStyle();  // Skapa stil för dataceller
 
         for (Object[] aBook : data) {
             Row row = sheet.createRow(rowCount);
@@ -64,8 +86,8 @@ public class ExcelPrinter {
 
                 } else if (field instanceof Double) {
                     cell.setCellValue((Double) field);
-
                 }
+                cell.setCellStyle(dataStyle);  // Applicera stil på dataceller
             }
         }
 
@@ -73,7 +95,6 @@ public class ExcelPrinter {
         for (int i = 0; i < data[0].length; i++) {
             sheet.autoSizeColumn(i);
         }
-
     }
 
     public void write() throws IOException {
