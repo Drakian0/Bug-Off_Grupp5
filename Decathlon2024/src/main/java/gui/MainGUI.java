@@ -1,13 +1,10 @@
 
 package gui;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 
 import java.awt.*;
 import java.io.IOException;
@@ -81,11 +78,11 @@ public class MainGUI {
         panel.add(scrollPane);
 
         // Table for displaying competitors and their results
-        String[] columnNames = {"Name", "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
-                "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
+        String[] columnNames = {"Name", "Dec 100m", "Dec 400m", "Dec 1500m",
+                "Dec 110m Hurdles", "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
-                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep High Jump",
-                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"};
+                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep Javelin Throw",
+                "Hep High Jump","Hep Long Jump", "Hep Shot Put", "Total Score"};
         tableModel = new DefaultTableModel(columnNames, 0);
         competitorTable = new JTable(tableModel);
         JScrollPane tableScrollPane = new JScrollPane(competitorTable);
@@ -249,8 +246,8 @@ public class MainGUI {
                 "Name", "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
                 "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
-                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep High Jump",
-                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"};
+                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep Javelin Throw",
+                "Hep High Jump", "Hep Long Jump", "Hep Shot Put", "Total Score"};
 
         ExcelPrinter printer = new ExcelPrinter("TrackAndFieldResults");
         printer.addHeaders(headers, "Results");  // Lägg till rubriker
