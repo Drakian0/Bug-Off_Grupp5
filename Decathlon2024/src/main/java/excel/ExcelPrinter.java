@@ -27,9 +27,9 @@ public class ExcelPrinter {
         CellStyle style = workbook.createCellStyle();
         style.setAlignment(HorizontalAlignment.CENTER);  // Centrera text
 
-        // Skapa och applicera fetstil på font
+        // Gör texten i rubrikerna fetstil
         Font font = workbook.createFont();
-        font.setBold(true);  // Gör texten fet
+        font.setBold(true);
         style.setFont(font);
 
         return style;
@@ -38,7 +38,14 @@ public class ExcelPrinter {
     // Skapa och applicera cellstil för dataceller
     private CellStyle createDataStyle() {
         CellStyle style = workbook.createCellStyle();
-        style.setAlignment(HorizontalAlignment.CENTER);  // Centrera text i dataceller
+        style.setAlignment(HorizontalAlignment.CENTER); // Centrerar
+
+        // Lägg till kantlinjer
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+
         return style;
     }
 
@@ -57,6 +64,8 @@ public class ExcelPrinter {
             cell.setCellValue(headers[i]);
             cell.setCellStyle(headerStyle);  // Applicera stil
         }
+        // Lås första raden
+        sheet.createFreezePane(0, 1);
     }
 
     // add-metoden lägger till själva datan, med start från andra raden.
@@ -67,7 +76,7 @@ public class ExcelPrinter {
         }
 
         int rowCount = sheet.getLastRowNum() + 1; // Fortsätter på raden efter rubrikerna
-        CellStyle dataStyle = createDataStyle();  // Skapa stil för dataceller
+        CellStyle dataStyle = createDataStyle();  // Applicerar stil för dataceller
 
         for (Object[] aBook : data) {
             Row row = sheet.createRow(rowCount);
