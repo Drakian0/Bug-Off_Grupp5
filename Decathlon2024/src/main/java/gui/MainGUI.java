@@ -44,7 +44,6 @@ public class MainGUI {
         panel.add(new JLabel("Enter Competitor's Name:"));
         panel.add(nameField);
 
-        // Added identifiers for all the events
         // Dropdown for selecting discipline
         String[] disciplines = {
                 "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
