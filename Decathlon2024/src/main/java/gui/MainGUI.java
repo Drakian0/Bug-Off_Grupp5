@@ -82,7 +82,7 @@ public class MainGUI {
                 "Dec 110m Hurdles", "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
                 "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep Javelin Throw",
-                "Hep High Jump","Hep Long Jump", "Hep Shot Put", "Total Score"};
+                "Hep High Jump", "Hep Long Jump", "Hep Shot Put", "Total Score"};
         tableModel = new DefaultTableModel(columnNames, 0);
         competitorTable = new JTable(tableModel);
         JScrollPane tableScrollPane = new JScrollPane(competitorTable);
@@ -108,7 +108,6 @@ public class MainGUI {
             String discipline = (String) disciplineBox.getSelectedItem();
             String resultText = resultField.getText();
 
-// added switches for hep events
             try {
                 double result = Double.parseDouble(resultText);
 
@@ -188,14 +187,14 @@ public class MainGUI {
                     JOptionPane.showMessageDialog(null, "Maximum number of competitors reached (40).", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     Competitor competitor = findCompetitorByName(name);
-                    if(competitor==null) {
+                    if (competitor == null) {
                         competitor = new Competitor(name);
                         competitors.add(competitor);
                     }
 
                     competitor.setScore(discipline, score);
                 }
-                
+
                 outputArea.append("Competitor: " + name + "\n");
                 outputArea.append("Discipline: " + discipline + "\n");
                 outputArea.append("Result: " + result + "\n");
@@ -208,6 +207,7 @@ public class MainGUI {
             }
         }
     }
+
     // Method to find an existing competitor by name
     private Competitor findCompetitorByName(String name) {
         for (Competitor competitor : competitors) {
@@ -234,10 +234,14 @@ public class MainGUI {
         String[][] data = new String[competitors.size()][];
         int i = 0;
         for (Competitor competitor : competitors) {
-            Object[] rowData = competitor.getRowData();
+            Object[] rowData = competitor.getRowData(); // Get the competitor's row data
+
+            // Ensure the array size matches the number of columns in rowData
             data[i] = new String[rowData.length];
+
+            // Safely copy rowData to data array
             for (int j = 0; j < rowData.length; j++) {
-                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : "";
+                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : ""; // Handle null values
             }
             i++;
         }

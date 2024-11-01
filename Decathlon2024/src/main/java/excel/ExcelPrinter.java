@@ -52,19 +52,19 @@ public class ExcelPrinter {
     // addHeaders skriver rubrikerna i den första raden.
     public void addHeaders(String[] headers, String sheetName) {
         XSSFSheet sheet = workbook.getSheet(sheetName);
-        if (sheet == null) {
-            sheet = workbook.createSheet(sheetName);
+       if (sheet == null) {
+            sheet = workbook.createSheet(sheetName);    // Skapa ett nytt blad om det inte finns
         }
 
         Row headerRow = sheet.createRow(0);  // Skapar första raden för rubrikerna
         CellStyle headerStyle = createHeaderStyle();  // Skapa stil för rubriker
 
         for (int i = 0; i < headers.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(headers[i]);
+            Cell cell = headerRow.createCell(i);    // Skapar cellen i rubrikraden
+            cell.setCellValue(headers[i]);      // Stoppar in titeln i cellen
             cell.setCellStyle(headerStyle);  // Applicera stil
         }
-        // Lås första raden
+        // Låser första raden
         sheet.createFreezePane(0, 1);
     }
 
@@ -72,7 +72,7 @@ public class ExcelPrinter {
     public void add(Object[][] data, String sheetName) {
         XSSFSheet sheet = workbook.getSheet(sheetName);
         if (sheet == null) {
-            sheet = workbook.createSheet(sheetName);
+            sheet = workbook.createSheet(sheetName);    // Skapa ett nytt blad om det inte finns
         }
 
         int rowCount = sheet.getLastRowNum() + 1; // Fortsätter på raden efter rubrikerna
