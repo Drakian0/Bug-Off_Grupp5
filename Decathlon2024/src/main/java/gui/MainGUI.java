@@ -49,8 +49,8 @@ public class MainGUI {
                 "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
                 "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
-                "Hep 100m Hurdles", "Hep 200m", "Hep 800m", "Hep Javelin Throw", "Hep High Jump",
-                "Hep Long Jump", "Hep Shot Put"
+                "Hep 100m Hurdles", "Hep 200m", "Hep 800m", "Hep Javelin Throw",
+                "Hep High Jump", "Hep Long Jump", "Hep Shot Put"
         };
         disciplineBox = new JComboBox<>(disciplines);
         panel.add(new JLabel("Select Discipline:"));
