@@ -56,16 +56,16 @@ public class Competitor {
             case "Hep 800m":
                 scores[12] = score;
                 break;
-            case "Hep High Jump":
+            case "Hep Javelin Throw":
                 scores[13] = score;
                 break;
-            case "Hep Long Jump":
+            case "Hep High Jump":
                 scores[14] = score;
                 break;
-            case "Hep Shot Put":
+            case "Hep Long Jump":
                 scores[15] = score;
                 break;
-            case "Hep Javelin Throw":
+            case "Hep Shot Put":
                 scores[16] = score;
                 break;
         }

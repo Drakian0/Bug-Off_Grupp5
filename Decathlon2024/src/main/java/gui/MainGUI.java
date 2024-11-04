@@ -1,12 +1,10 @@
-package gui;
 
+package gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 
 import java.awt.*;
 import java.io.IOException;
@@ -46,14 +44,13 @@ public class MainGUI {
         panel.add(new JLabel("Enter Competitor's Name:"));
         panel.add(nameField);
 
-        // Added identifiers for all the events
         // Dropdown for selecting discipline
         String[] disciplines = {
                 "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
                 "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
-                "Hep 100m Hurdles", "Hep 200m", "Hep 800m", "Hep Javelin Throw", "Hep High Jump",
-                "Hep Long Jump", "Hep Shot Put"
+                "Hep 100m Hurdles", "Hep 200m", "Hep 800m", "Hep Javelin Throw",
+                "Hep High Jump", "Hep Long Jump", "Hep Shot Put"
         };
         disciplineBox = new JComboBox<>(disciplines);
         panel.add(new JLabel("Select Discipline:"));
@@ -80,11 +77,11 @@ public class MainGUI {
         panel.add(scrollPane);
 
         // Table for displaying competitors and their results
-        String[] columnNames = {"Name", "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
-                "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
+        String[] columnNames = {"Name", "Dec 100m", "Dec 400m", "Dec 1500m",
+                "Dec 110m Hurdles", "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
                 "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
-                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep High Jump",
-                "Hep Javelin Throw", "Hep Long Jump", "Hep Shot Put", "Total Score"};
+                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep Javelin Throw",
+                "Hep High Jump", "Hep Long Jump", "Hep Shot Put", "Total Score"};
         tableModel = new DefaultTableModel(columnNames, 0);
         competitorTable = new JTable(tableModel);
         JScrollPane tableScrollPane = new JScrollPane(competitorTable);
@@ -96,6 +93,13 @@ public class MainGUI {
         frame.setVisible(true);
     }
 
+    private void updateCompetitorTable() {
+        tableModel.setRowCount(0); // Rensa tabellen innan uppdatering
+        for (Competitor competitor : competitors) {
+            tableModel.addRow(competitor.getRowData());
+        }
+    }
+
     private class CalculateButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -103,7 +107,6 @@ public class MainGUI {
             String discipline = (String) disciplineBox.getSelectedItem();
             String resultText = resultField.getText();
 
-// added switches for hep events
             try {
                 double result = Double.parseDouble(resultText);
 
@@ -183,23 +186,27 @@ public class MainGUI {
                     JOptionPane.showMessageDialog(null, "Maximum number of competitors reached (40).", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     Competitor competitor = findCompetitorByName(name);
-                    if(competitor==null) {
+                    if (competitor == null) {
                         competitor = new Competitor(name);
                         competitors.add(competitor);
                     }
 
                     competitor.setScore(discipline, score);
                 }
-                
+
                 outputArea.append("Competitor: " + name + "\n");
                 outputArea.append("Discipline: " + discipline + "\n");
                 outputArea.append("Result: " + result + "\n");
                 outputArea.append("Score: " + score + "\n\n");
+
+                updateCompetitorTable(); // Uppdaterar GUI-tabellen med den senaste informationen
+
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Please enter a valid number for the result.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
+
     // Method to find an existing competitor by name
     private Competitor findCompetitorByName(String name) {
         for (Competitor competitor : competitors) {
@@ -233,13 +240,21 @@ public class MainGUI {
 
             // Safely copy rowData to data array
             for (int j = 0; j < rowData.length; j++) {
-                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : "";  // Handle null values
+                data[i][j] = (rowData[j] != null) ? rowData[j].toString() : ""; // Handle null values
             }
             i++;
         }
 
+        String[] headers = {
+                "Name", "Dec 100m", "Dec 400m", "Dec 1500m", "Dec 110m Hurdles",
+                "Dec Long Jump", "Dec High Jump", "Dec Pole Vault",
+                "Dec Discus Throw", "Dec Javelin Throw", "Dec Shot Put",
+                "Hep 100M Hurdles", "Hep 200M", "Hep 800M", "Hep Javelin Throw",
+                "Hep High Jump", "Hep Long Jump", "Hep Shot Put", "Total Score"};
+
         ExcelPrinter printer = new ExcelPrinter("TrackAndFieldResults");
-        printer.add(data, "Results");
+        printer.addHeaders(headers, "Results");  // Lägg till rubriker
+        printer.add(data, "Results");            // Lägg till data
         printer.write();
     }
 
